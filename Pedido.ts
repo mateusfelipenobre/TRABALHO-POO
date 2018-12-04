@@ -1,19 +1,11 @@
-class Pedido{
-    private pedinte : Cliente[];
-    private pacote : Produto[];
+import { ProdutoIndisponivelError } from "./ProdutoIndisponivelError";
+import {Estabelecimento} from "./Estabelecimento";
+
+export class Pedido{
     private tempoEntreg : number;
     private valorFinal : number;
 
-    public constructor(pedinte : Cliente[], pacote : Produto[], tempoEntreg : number, valorFinal : number){
-        this.pedinte = pedinte;
-        this.pacote = pacote;
-        this.tempoEntreg = tempoEntreg;
-        this.valorFinal = valorFinal;
-    }
-
-    public tempoTotal(produto : Produto){
-        let total : number;
-        total = produto.getTempoPrep() + this.tempoEntreg;
-        return total; 
+    public adicionarProduto(id : number, nome : string,descricao: string, preco : number, tempoPrep : number): void{
+        Estabelecimento.getCardapio().push(new ProdutoImpl(id,nome,descricao,preco,tempoPrep));
     }
 }
